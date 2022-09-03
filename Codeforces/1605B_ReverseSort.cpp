@@ -15,9 +15,24 @@ int main(void) {
 
         else {
             
-            cout << 1 << "\n";
-            cout << n << " ";
-            for(int i = 1; i <= n; i++) cout << i << " ";
+            int ones = 0;
+            for(int i = 0; i < n; i++) {
+                if(s[i] == '1') ones++;
+            }
+            set<int> res;
+            int i;
+            int len = n - ones;
+            for(i = n-1; ones > 0 && i >= len; i--) {
+                if(s[i] == '1') ones--;
+                else res.insert(i + 1);
+            }
+            
+            for(; i >= 0; i--) {
+                if(s[i] == '1') res.insert(i + 1);
+            }
+
+            cout << 1 << "\n" << res.size() << " ";
+            for(auto &x: res) cout << x << " ";
             cout << "\n";
         }
     }
